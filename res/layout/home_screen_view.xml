@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_big"
+    android:background="@drawable/background_stand_in"
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btn_play"
         android:layout_width="120dip"
         android:layout_height="40dip"
         android:layout_alignParentBottom="true"
