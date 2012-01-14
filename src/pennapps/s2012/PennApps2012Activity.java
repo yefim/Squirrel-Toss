@@ -11,7 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.widget.Button;
 
-public class PennApps2012Activity extends Activity implements OnClickListener, OnKeyListener {
+public class PennApps2012Activity extends Activity implements OnClickListener {
     public static int screen_height;
 	public static int screen_width;
 
@@ -28,11 +28,6 @@ public class PennApps2012Activity extends Activity implements OnClickListener, O
         Button play = (Button) this.findViewById(R.id.btn_play);
         play.setOnClickListener(this);
     }
-	
-	@Override
-	public boolean onKey(View v, int keyCode, KeyEvent event) {
-		return false;
-	}
 
 	@Override
 	public void onClick(View v) {

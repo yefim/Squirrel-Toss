@@ -1,11 +1,12 @@
 package pennapps.s2012;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -14,7 +15,8 @@ import android.view.SurfaceView;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private SurfaceHolder _holder;
 	private GameThread _gameThread;
-	private Sprite _sprite;
+	private Squirrel _squirrel;
+	private ArrayList<Acorn> _acorns;
 	private Background[] _backgrounds;
 	private int viewWidth = 0;
 	private int viewHeight = 0;
@@ -24,21 +26,24 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		_holder = getHolder();
 		_holder.addCallback(this);
 		_gameThread = new GameThread(this);
-		Bitmap bmp = BitmapFactory.decodeResource(getResources(),
-				R.drawable.squirrel_small);
-		_sprite = new Sprite(this, bmp);
-		bmp = BitmapFactory.decodeResource(getResources(),
-				R.drawable.background_stand_in);
+		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.squirrel_small);
+		_squirrel = new Squirrel(bmp);
+		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.background_stand_in);
 		_backgrounds = new Background[2];
 		_backgrounds[1] = new Background(this, bmp, false);
-		bmp = BitmapFactory.decodeResource(getResources(),
-				R.drawable.sky_stand_in);
-		Log.d("GameView",
-				"height:" + this.getHeight() + "\nwidth" + this.getWidth());
+		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.sky_stand_in);
 		_backgrounds[0] = new Background(this, bmp, true);
+		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.acorn);
+		_acorns = new ArrayList<Acorn>();
+		setUpAcorns(bmp);
 	}
-	public Sprite getSprite() {
-		return _sprite;
+	private void setUpAcorns(Bitmap a) {
+		for (int i = 0; i < 10; i++) {
+			_acorns.add(new Acorn(a));
+		}
+	}
+	public Squirrel getSquirrel() {
+		return _squirrel;
 	}
 
 	protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld) {
@@ -50,22 +55,21 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	public float getX() {
 		return viewWidth;
 	}
-
 	public float getY() {
 		return viewHeight;
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
 		synchronized (event) {
-			if (!_sprite.isInFreeFall()) {
+			if (!_squirrel.isInFreeFall()) {
 				if (event.getAction() == MotionEvent.ACTION_MOVE
 						|| event.getAction() == MotionEvent.ACTION_DOWN) {
-					_sprite.setPosition(event.getX(), event.getY());
+					_squirrel.setPosition(event.getX(), event.getY());
 				} else if (event.getAction() == MotionEvent.ACTION_UP) {
-					_sprite.inFreeFall();
+					_squirrel.inFreeFall();
 					for (int i = 0; i < _backgrounds.length; i++)
-						_backgrounds[i].setSpeed(-1 * _sprite.getXSpeed(), -1
-								* _sprite.getYSpeed());
+						_backgrounds[i].setSpeed(-1 * _squirrel.getXSpeed(), -1
+								* _squirrel.getYSpeed());
 				}
 			}
 		}
@@ -77,7 +81,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		canvas.drawColor(Color.BLACK);
 		for (int i = 0; i < _backgrounds.length; i++)
 			_backgrounds[i].onDraw(canvas);
-		_sprite.onDraw(canvas);
+		_squirrel.onDraw(canvas);
+		for (Acorn a : _acorns)
+			a.onDraw(canvas);
 	}
 
 	@Override

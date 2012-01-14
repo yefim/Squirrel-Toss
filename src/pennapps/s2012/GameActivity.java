@@ -43,11 +43,9 @@ public class GameActivity extends Activity implements OnClickListener {
 					return false;
 				// top to bottom swipe or downward swipe
 				if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
-					_gameView.getSprite().tiltUp();
-					Log.d("GameActivity", "SWIPED UP!");
+					_gameView.getSquirrel().tiltUp();
 				} else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
-					_gameView.getSprite().tiltDown();
-					Log.d("GameActivity", "swiped down :(");
+					_gameView.getSquirrel().tiltDown();
 				}
 					
 			} catch (Exception e) {
