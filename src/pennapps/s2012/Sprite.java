@@ -16,9 +16,9 @@ public class Sprite {
 	private boolean _inFreeFall, _catchingUp;
 	private double _angle_radians = 0.0f;
 	// dv = dt * a
-	private final double GRAVITY_CONSTANT = 4.9;
+	private final double GRAVITY_CONSTANT = 2.5;
 	private final double GRAVITY_DROP = GRAVITY_CONSTANT/GameThread.FPS;
-	private final double TILT_ANGLE_RADIANS = 1.0;
+	private final double TILT_ANGLE_RADIANS = .25;
 	private final double BOOST = 1.0;
 	private final double SLOW_DOWN = 0.005;
 	private final float POS_X = (float) (PennApps2012Activity.screen_width/4.0);
