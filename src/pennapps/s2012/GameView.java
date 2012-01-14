@@ -19,6 +19,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private ArrayList<Acorn> _acorns;
 	private int _acornsEaten = 0;
 	private ScoreBar _scorebar;
+	private boolean _gameOver = false;
+	
 	private Background[] _backgrounds;
 	private int viewWidth = 0;
 	private int viewHeight = 0;
@@ -31,13 +33,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		Bitmap bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.squirrel_small);
 		_squirrel = new Squirrel(bmp);
+		
+		_backgrounds = new Background[2];
 		bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.background_stand_in);
-		_backgrounds = new Background[2];
 		_backgrounds[1] = new Background(this, bmp, _squirrel, false);
 		bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.sky_stand_in);
 		_backgrounds[0] = new Background(this, bmp, _squirrel, true);
+		
 		_acorns = new ArrayList<Acorn>();
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.score_bar);
 		_scorebar = new ScoreBar(_squirrel, bmp);
@@ -91,9 +95,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 					_squirrel.setPosition(event.getX(), event.getY());
 				} else if (event.getAction() == MotionEvent.ACTION_UP) {
 					_squirrel.inFreeFall();
-					for (int i = 0; i < _backgrounds.length; i++)
-						_backgrounds[i].setSpeed(-1 * _squirrel.getXSpeed(), -1
-								* _squirrel.getYSpeed());
 				}
 			}
 		}
@@ -105,6 +106,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		canvas.drawColor(Color.BLACK);
 		for (int i = 0; i < _backgrounds.length; i++)
 			_backgrounds[i].onDraw(canvas);
+		if (_squirrel.getAltitude() <= 0) {
+			Log.d("GameView", "game over");
+			_gameThread.setRunning(false);
+			_gameOver = true;
+			return;
+		}
 		_squirrel.onDraw(canvas);
 		for (int i = 0; i < _acorns.size(); i++) {
 			if (_squirrel.intersects(_acorns.get(i))) {

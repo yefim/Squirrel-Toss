@@ -36,9 +36,7 @@ public class ScoreBar {
 		Paint scores = new Paint();
 		scores.setARGB(255, 52, 143, 188);
 		scores.setTextSize(30);
-		String scoresText = this.getScoresText(); 
-		
-		
+		String scoresText = this.getScoresText();
 		
 		c.drawText(scoresText, 10, 30, scores);
 	}
@@ -47,7 +45,7 @@ public class ScoreBar {
 	}
 	private String getScoresText() {
 		NumberFormat f = new DecimalFormat("#0.00");
-		return "Velocity: " + f.format(_squirrel.getVelocity()/VELOCITY_SCALE) + " Altitude: " + f.format(_squirrel.getAltitude()/ALTITUDE_SCALE) + " Distance: " + f.format(_squirrel.getDistance()/DISTANCE_SCALE); 
+		return "Vel: " + f.format(_squirrel.getVelocity()/VELOCITY_SCALE) + " Alt: " + f.format(_squirrel.getAltitude()/ALTITUDE_SCALE) + " Dist: " + f.format(_squirrel.getDistance()/DISTANCE_SCALE); 
 	}
 	
 }

@@ -34,12 +34,12 @@ public class Background {
 		if (_leader.isInFreeFall()) {
 			_x -= _leader.getXSpeed();
 			_x %= _width;
-			_y -= _leader.getYSpeed();
-			if (_tileUp) {
-				if (_y > _height) {
-					Log.d("Background", "y: " + _y + "x: " + _x);
-					_y %= _height;
-					Log.d("Background", "y: " + _y + "x: " + _x);
+			if (!_leader.isFallingToGround()) {
+				_y -= _leader.getYSpeed();
+				if (_tileUp) {
+					if (_y > _height) {
+						_y %= _height;
+					}
 				}
 			}
 		}
@@ -56,21 +56,11 @@ public class Background {
 			canvas.drawBitmap(_bmp, _width + _x, _y
 					+ -PennApps2012Activity.screen_height, null);
 		}
-
 	}
-
-	public void setSpeed(float xSpeed, float ySpeed) {
-		_xSpeed = xSpeed;
-		_ySpeed = ySpeed;
-	}
-
 	public float getXSpeed() {
-		// TODO Auto-generated method stub
 		return -_leader.getXSpeed();
 	}
-
 	public float getYSpeed() {
-		// TODO Auto-generated method stub
 		return -_leader.getYSpeed();
 	}
 }
