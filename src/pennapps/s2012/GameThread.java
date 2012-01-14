@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import android.graphics.Canvas;
-import android.util.Log;
 
 public class GameThread extends Thread {
 	static final long FPS = 60;
@@ -26,7 +25,7 @@ public class GameThread extends Thread {
 		while (_running) {
 			Canvas c = null;
 			startTime = System.currentTimeMillis();
-			if(r.nextInt(10)<3)
+			if(r.nextInt(100) < 15)
 				_view.addAcorn();
 			ArrayList<Acorn> acorns = _view.getAcorns();
 			for (int i = 0; i < acorns.size(); i++) {

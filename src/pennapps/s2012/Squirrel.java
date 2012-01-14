@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class Squirrel extends Sprite {
 	private int _fuel = 100;
-	private boolean _inFreeFall, _catchingUp;
+	private boolean _inFreeFall, _catchingUp, _fallToGround;
 	// dv = dt * a
 	private final double GRAVITY_CONSTANT = 2.5;
 	private final double GRAVITY_DROP = GRAVITY_CONSTANT/GameThread.FPS;
@@ -50,13 +50,18 @@ public class Squirrel extends Sprite {
 		accelerate_due_to_gravity();
 		decelerate();
 		rotate();
+		if (this.getAltitude() - PennApps2012Activity.screen_height < 0) {
+			_fallToGround = false;
+		} else {
+			_fallToGround = true;
+		}
+	}
+	public boolean isFallingToGround() {
+		return _fallToGround;
 	}
 	public void move() {
-		double xVelocity = _velocity*Math.cos(_angle_radians);
-		double yVelocity = _velocity*Math.sin(_angle_radians);
-		
-		_x += xVelocity;
-		_y += yVelocity;
+		_x += _velocity*Math.cos(_angle_radians);
+		_y += _velocity*Math.sin(_angle_radians);
 	}
 	public void tiltUp() {
 		if (_angle_radians <= Math.toRadians(-MAX_MIN_ANGLE)) return;
@@ -87,7 +92,10 @@ public class Squirrel extends Sprite {
 	
 	public void onDraw(Canvas canvas) {
 		if(_inFreeFall) {
-			update();	
+			update();
+			if (_fallToGround) {
+				
+			}
 			canvas.drawBitmap(_bmp, _matrix, null);
 		} else {
 			canvas.drawBitmap(_bmp, _x, _y, null);
