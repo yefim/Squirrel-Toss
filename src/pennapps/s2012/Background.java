@@ -28,7 +28,6 @@ public class Background {
 			canvas.drawBitmap(_bmp, _width+_x, 0, null);
 		
 	}
-
 	public void setSpeed(float speed) {
 		_speed = speed;
 	}

@@ -3,7 +3,7 @@ package pennapps.s2012;
 import android.graphics.Canvas;
 
 public class GameThread extends Thread {
-	static final long FPS = 48;
+	static final long FPS = 60;
 	private GameView _view;
 	private boolean _running = false; 
 

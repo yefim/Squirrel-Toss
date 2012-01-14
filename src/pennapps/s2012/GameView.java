@@ -21,7 +21,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		_holder.addCallback(this);
 		_gameThread = new GameThread(this);
 		Bitmap bmp = BitmapFactory.decodeResource(getResources(),
-				R.drawable.squirrel_stand_in);
+				R.drawable.squirrel_small);
 		_sprite = new Sprite(this, bmp);
 		bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.background_stand_in);
@@ -34,7 +34,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 				_sprite.setPosition(event.getX(), event.getY());
 			} else if (event.getAction() == MotionEvent.ACTION_UP) {
 				_sprite.inFreeFall();
-				_background.setSpeed(-1*_sprite.getSpeed());
+				_background.setSpeed(-1*(float)_sprite.getXSpeed());
 			}
 
 		}
