@@ -18,6 +18,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private Squirrel _squirrel;
 	private ArrayList<Acorn> _acorns;
 	private int _acornsEaten = 0;
+	private ScoreBar _scorebar;
 	private Background[] _backgrounds;
 	private int viewWidth = 0;
 	private int viewHeight = 0;
@@ -38,6 +39,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 				R.drawable.sky_stand_in);
 		_backgrounds[0] = new Background(this, bmp, _squirrel, true);
 		_acorns = new ArrayList<Acorn>();
+		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.score_bar);
+		_scorebar = new ScoreBar(_squirrel, bmp);
 	}
 
 	public void addAcorn() {
@@ -112,6 +115,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			}
 			_acorns.get(i).onDraw(canvas);
 		}
+		_scorebar.onDraw(canvas);
 	}
 
 	@Override
