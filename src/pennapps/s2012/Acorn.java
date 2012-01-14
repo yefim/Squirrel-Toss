@@ -12,9 +12,9 @@ public class Acorn extends Sprite {
 	public Acorn(Bitmap bmp) {
 		super(bmp);
 		Random r = new Random();
-		_x = r.nextInt(PennApps2012Activity.screen_width);
-		_y = r.nextInt(PennApps2012Activity.screen_height);
-		_angle_radians = Math.PI - 0.3;
+		_x = r.nextInt(PennApps2012Activity.screen_width) + PennApps2012Activity.screen_width/4;
+		_y = -PennApps2012Activity.screen_width/4;
+		_angle_radians = 0.0;
 		_velocity = 1.0;
 	}
 
@@ -34,10 +34,16 @@ public class Acorn extends Sprite {
 		move();
 	}
 
+	public boolean onScreen() {
+		return _x > 0 && _y < PennApps2012Activity.screen_height;
+	}
+
 	@Override
 	public void move() {
-		double xVelocity = _velocity * Math.cos(_angle_radians) + _backgroundXSpeed;
-		double yVelocity = _velocity * Math.sin(_angle_radians) + _backgroundYSpeed;
+		double xVelocity = _velocity * Math.cos(_angle_radians)
+				+ _backgroundXSpeed;
+		double yVelocity = _velocity * Math.sin(_angle_radians)
+				+ _backgroundYSpeed;
 
 		_x += xVelocity;
 		_y += yVelocity;

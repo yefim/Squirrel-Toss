@@ -66,11 +66,11 @@ public class Background {
 
 	public float getXSpeed() {
 		// TODO Auto-generated method stub
-		return _xSpeed;
+		return -_leader.getXSpeed();
 	}
 
 	public float getYSpeed() {
 		// TODO Auto-generated method stub
-		return _ySpeed;
+		return -_leader.getYSpeed();
 	}
 }

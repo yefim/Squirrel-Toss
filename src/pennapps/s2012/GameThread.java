@@ -26,15 +26,20 @@ public class GameThread extends Thread {
 		while (_running) {
 			Canvas c = null;
 			startTime = System.currentTimeMillis();
-			if(r.nextInt(10)<3)
+			if (_view.getSquirrel().isInFreeFall() && r.nextInt(100) < 15)
 				_view.addAcorn();
 			ArrayList<Acorn> acorns = _view.getAcorns();
 			for (int i = 0; i < acorns.size(); i++) {
-				acorns.get(i).setBackgroundVelocity(_view.getBackgroundXSpeed(), _view.getBackgroundYSpeed());
+				acorns.get(i).setBackgroundVelocity(
+						_view.getBackgroundXSpeed(),
+						_view.getBackgroundYSpeed());
 				if (_view.getSquirrel().intersects(acorns.get(i))) {
 					_view.acornEaten();
 					acorns.remove(i);
 					i -= 1;
+				} else if (!acorns.get(i).onScreen()) {
+					acorns.remove(i);
+					i--;
 				}
 			}
 			try {
