@@ -33,7 +33,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		_backgrounds[1] = new Background(this, bmp, false);
 		bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.sky_stand_in);
-		Log.d("GameView", "height:"+this.getHeight()+"\nwidth"+this.getWidth());
+		Log.d("GameView",
+				"height:" + this.getHeight() + "\nwidth" + this.getWidth());
 		_backgrounds[0] = new Background(this, bmp, true);
 	}
 
@@ -42,22 +43,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		viewWidth = xNew;
 		viewHeight = yNew;
 	}
-	
-	public float getX(){
+
+	public float getX() {
 		return viewWidth;
 	}
-	
-	public float getY(){
+
+	public float getY() {
 		return viewHeight;
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
 		synchronized (event) {
-			/*
-			 * if (_sprite.isInFreeFall()) {
-			 * 
-			 * } else {
-			 */
 			if (event.getAction() == MotionEvent.ACTION_MOVE
 					|| event.getAction() == MotionEvent.ACTION_DOWN) {
 				_sprite.setPosition(event.getX(), event.getY());
@@ -67,9 +63,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 					_backgrounds[i].setSpeed(-1 * _sprite.getXSpeed(), -1
 							* _sprite.getYSpeed());
 			}
-			// }
-
-		}
+			if (event.getAction() == MotionEvent.ACTION_MOVE
+						|| event.getAction() == MotionEvent.ACTION_DOWN) {
+					_sprite.setPosition(event.getX(), event.getY());
+				} else if (event.getAction() == MotionEvent.ACTION_UP) {
+					_sprite.inFreeFall();
+					for(int i=0; i<_backgrounds.length; i++)
+						_backgrounds[i].setSpeed(-1 * _sprite.getXSpeed(), -1 * _sprite.getYSpeed());
+				}
+			}
 		return true;
 	}
 

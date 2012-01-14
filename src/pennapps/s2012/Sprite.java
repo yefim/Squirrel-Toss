@@ -20,7 +20,7 @@ public class Sprite {
 	private final double GRAVITY_DROP = GRAVITY_CONSTANT/GameThread.FPS;
 	private final double TILT_ANGLE = 0.5;
 	private final double BOOST = 1.0;
-	private final double SLOW_DOWN = 0.5;
+	private final double SLOW_DOWN = 0.005;
 
 	public Sprite(GameView gameView, Bitmap bmp) {
 		_gameView = gameView;
@@ -49,8 +49,8 @@ public class Sprite {
 
 	private void update() {
 		move();
-		//accelerate_due_to_gravity();
-		//decelerate();
+		accelerate_due_to_gravity();
+		decelerate();
 		rotate();
 	}
 	private void move() {
@@ -86,6 +86,7 @@ public class Sprite {
 	}
 	
 	private void decelerate() {
+		if (_velocity <= 0) return;
 		_velocity -= SLOW_DOWN;
 	}
 	
