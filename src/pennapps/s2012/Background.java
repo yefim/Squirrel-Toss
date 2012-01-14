@@ -13,9 +13,9 @@ public class Background {
 	private int _width;
 	private boolean _tileUp = false;
 	private int _height;
-	private Sprite _leader;
+	private Squirrel _leader;
 
-	public Background(GameView gameView, Sprite leader, Bitmap bmp) {
+	public Background(GameView gameView, Squirrel leader, Bitmap bmp) {
 		_gameView = gameView;
 		_bmp = bmp;
 		_width = bmp.getWidth();
@@ -24,7 +24,7 @@ public class Background {
 		_y = PennApps2012Activity.screen_height - _height;
 	}
 
-	public Background(GameView gameView, Bitmap bmp, Sprite leader,
+	public Background(GameView gameView, Bitmap bmp, Squirrel leader,
 			boolean tileUp) {
 		this(gameView, leader, bmp);
 		_tileUp = tileUp;
