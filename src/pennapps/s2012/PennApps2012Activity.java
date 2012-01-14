@@ -34,6 +34,5 @@ public class PennApps2012Activity extends Activity implements OnClickListener {
 		Intent intent = new Intent();
         intent.setClass(v.getContext(), GameActivity.class);
         startActivity(intent);
-
 	}
 }

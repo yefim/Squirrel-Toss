@@ -26,6 +26,15 @@ public abstract class Sprite {
 	public float getXSpeed() {
 		return (float) (_velocity*Math.cos(_angle_radians));
 	}
+	public double getVelocity() {
+		return _velocity;
+	}
+	public float getDistance() {
+		return _x;
+	}
+	public float getAltitude() {
+		return -(_y - PennApps2012Activity.screen_height);
+	}
 	public abstract void onDraw(Canvas canvas);
 	public abstract void update();
 	public abstract void move();

@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.util.Log;
 
 public class Squirrel extends Sprite {
+	private int _fuel = 100;
 	private boolean _inFreeFall, _catchingUp;
 	// dv = dt * a
 	private final double GRAVITY_CONSTANT = 2.5;
@@ -67,6 +68,7 @@ public class Squirrel extends Sprite {
 	}
 	public void boost() {
 		_velocity += BOOST;
+		_fuel -= 1;
 	}
 	private void accelerate_due_to_gravity() {
 		// break up velocity into X and Y, reduce Y velocity,
@@ -98,5 +100,8 @@ public class Squirrel extends Sprite {
 	}
 	public boolean isInFreeFall() {
 		return this._inFreeFall;
+	}
+	public int getFuel() {
+		return _fuel;
 	}
 }
