@@ -63,4 +63,14 @@ public class Background {
 		_xSpeed = xSpeed;
 		_ySpeed = ySpeed;
 	}
+
+	public float getXSpeed() {
+		// TODO Auto-generated method stub
+		return _xSpeed;
+	}
+
+	public float getYSpeed() {
+		// TODO Auto-generated method stub
+		return _ySpeed;
+	}
 }

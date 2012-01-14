@@ -27,22 +27,33 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		_holder = getHolder();
 		_holder.addCallback(this);
 		_gameThread = new GameThread(this);
-		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.squirrel_small);
+		Bitmap bmp = BitmapFactory.decodeResource(getResources(),
+				R.drawable.squirrel_small);
 		_squirrel = new Squirrel(bmp);
-		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.background_stand_in);
+		bmp = BitmapFactory.decodeResource(getResources(),
+				R.drawable.background_stand_in);
 		_backgrounds = new Background[2];
 		_backgrounds[1] = new Background(this, bmp, _squirrel, false);
-		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.sky_stand_in);
+		bmp = BitmapFactory.decodeResource(getResources(),
+				R.drawable.sky_stand_in);
 		_backgrounds[0] = new Background(this, bmp, _squirrel, true);
-		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.acorn);
 		_acorns = new ArrayList<Acorn>();
-		setUpAcorns(bmp);
 	}
-	private void setUpAcorns(Bitmap a) {
-		for (int i = 0; i < 10; i++) {
-			_acorns.add(new Acorn(a));
-		}
+
+	public void addAcorn() {
+		Bitmap bmp = BitmapFactory.decodeResource(getResources(),
+				R.drawable.acorn);
+		_acorns.add(new Acorn(bmp));
 	}
+	
+	public ArrayList<Acorn> getAcorns() {
+		return _acorns;
+	}
+
+	public void acornEaten(){
+		_acornsEaten++;
+	}
+	
 	public Squirrel getSquirrel() {
 		return _squirrel;
 	}
@@ -56,8 +67,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	public float getX() {
 		return viewWidth;
 	}
+
 	public float getY() {
 		return viewHeight;
+	}
+	
+	public float getBackgroundXSpeed() {
+		return _backgrounds[0].getXSpeed();
+	}
+	
+	public float getBackgroundYSpeed() {
+		return _backgrounds[0].getYSpeed();
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
@@ -89,9 +109,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 				Log.d("GameView","intersected!" + _acornsEaten);
 				_acorns.remove(i);
 				i -= 1;
-			} else {
-				_acorns.get(i).onDraw(canvas);
 			}
+			_acorns.get(i).onDraw(canvas);
 		}
 	}
 
@@ -107,18 +126,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		_gameThread.start();
 	}
 
-
 	@Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-           boolean retry = true;
-           _gameThread.setRunning(false);
-           while (retry) {
-                  try {
-                        _gameThread.join();
-                        retry = false;
-                  } catch (InterruptedException e) {
-                  }
-           }
-    }
+	public void surfaceDestroyed(SurfaceHolder holder) {
+		boolean retry = true;
+		_gameThread.setRunning(false);
+		while (retry) {
+			try {
+				_gameThread.join();
+				retry = false;
+			} catch (InterruptedException e) {
+			}
+		}
+	}
 
 }

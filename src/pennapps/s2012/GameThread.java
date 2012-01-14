@@ -1,11 +1,15 @@
 package pennapps.s2012;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import android.graphics.Canvas;
+import android.util.Log;
 
 public class GameThread extends Thread {
 	static final long FPS = 60;
 	private GameView _view;
-	private boolean _running = false; 
+	private boolean _running = false;
 
 	public GameThread(GameView view) {
 		_view = view;
@@ -18,9 +22,21 @@ public class GameThread extends Thread {
 	@Override
 	public void run() {
 		long ticksPS = 1000 / FPS, startTime, sleepTime;
+		Random r = new Random();
 		while (_running) {
 			Canvas c = null;
 			startTime = System.currentTimeMillis();
+			if(r.nextInt(10)<3)
+				_view.addAcorn();
+			ArrayList<Acorn> acorns = _view.getAcorns();
+			for (int i = 0; i < acorns.size(); i++) {
+				acorns.get(i).setBackgroundVelocity(_view.getBackgroundXSpeed(), _view.getBackgroundYSpeed());
+				if (_view.getSquirrel().intersects(acorns.get(i))) {
+					_view.acornEaten();
+					acorns.remove(i);
+					i -= 1;
+				}
+			}
 			try {
 				c = _view.getHolder().lockCanvas();
 				synchronized (_view.getHolder()) {
