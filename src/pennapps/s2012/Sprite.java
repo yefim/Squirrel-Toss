@@ -84,9 +84,11 @@ public class Sprite {
 		_velocity = Math.sqrt(xVelocity*xVelocity + yVelocity*yVelocity);
 		_angle_radians = Math.atan2(yVelocity, xVelocity);
 	}
+	
 	private void decelerate() {
 		_velocity -= SLOW_DOWN;
 	}
+	
 	public void onDraw(Canvas canvas) {
 		if(_inFreeFall) {
 			update();	
@@ -95,7 +97,7 @@ public class Sprite {
 			canvas.drawBitmap(_bmp, _x, _y, null);
 		}
 	}
-<<<<<<< Updated upstream
+	
 	private void rotate() {
 		float rotation_degrees = (float)Math.toDegrees(_angle_radians);
 		_matrix.setRotate(rotation_degrees,_bmp.getWidth()/2,_bmp.getHeight()/2);
@@ -105,19 +107,12 @@ public class Sprite {
 	public float getYSpeed() {
 		return (float) (_velocity*Math.sin(_angle_radians));
 	}
+	
 	public boolean isInFreeFall() {
 		return this._inFreeFall;
 	}
+	
 	public float getXSpeed() {
 		return (float) (_velocity*Math.cos(_angle_radians));
-=======
-
-	public float getXSpeed() {
-		return _xSpeed;
->>>>>>> Stashed changes
-	}
-	
-	public float getYSpeed() {
-		return _ySpeed;
 	}
 }
