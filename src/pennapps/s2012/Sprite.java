@@ -49,7 +49,7 @@ public class Sprite {
 
 	private void update() {
 		move();
-		accelerate_due_to_gravity();
+		//accelerate_due_to_gravity();
 		//decelerate();
 		rotate();
 	}
