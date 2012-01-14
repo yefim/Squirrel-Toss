@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, PennApps2012Activity!</string>
     <string name="app_name">PennApps2012</string>
+    <string name="test_string">TESTING</string>
 
 </resources>

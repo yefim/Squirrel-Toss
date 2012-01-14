@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 public class GameActivity extends Activity implements OnClickListener {
 	private static final int SWIPE_MIN_DISTANCE = 120;
@@ -31,6 +32,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		
 		_gameView = new GameView(this);
 		this.setContentView(_gameView);
+		_gameView.setTextView((TextView) findViewById(R.id.text));
 		_gameView.setOnClickListener((OnClickListener) GameActivity.this);
 		_gameView.setOnTouchListener(_gestureListener);
 	}
@@ -60,6 +62,5 @@ public class GameActivity extends Activity implements OnClickListener {
 		}
 	}
 	@Override
-	public void onClick(View v) {
-	}
+	public void onClick(View v) { }
 }

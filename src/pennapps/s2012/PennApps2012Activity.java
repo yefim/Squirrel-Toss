@@ -21,6 +21,7 @@ public class PennApps2012Activity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        
         screen_height = displaymetrics.heightPixels;
         screen_width = displaymetrics.widthPixels;
         

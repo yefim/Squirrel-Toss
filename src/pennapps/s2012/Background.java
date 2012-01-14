@@ -3,11 +3,9 @@ package pennapps.s2012;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
-import android.view.Display;
 
 public class Background {
 	private float _x = 0, _y = 0;
-	private float _xSpeed = 0, _ySpeed = 0;
 	private GameView _gameView;
 	private Bitmap _bmp;
 	private int _width;

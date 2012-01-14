@@ -11,15 +11,17 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.TextView;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private SurfaceHolder _holder;
 	private GameThread _gameThread;
+    private TextView _statusText;
 	private Squirrel _squirrel;
 	private ArrayList<Acorn> _acorns;
 	private int _acornsEaten = 0;
 	private ScoreBar _scorebar;
-	private boolean _gameOver = false;
 	
 	private Background[] _backgrounds;
 	private int viewWidth = 0;
@@ -64,7 +66,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	public Squirrel getSquirrel() {
 		return _squirrel;
 	}
-
+	public void setTextView(TextView newView) {
+        _statusText = newView;
+    }
 	protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld) {
 		super.onSizeChanged(xNew, yNew, xOld, yOld);
 		viewWidth = xNew;
@@ -108,8 +112,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			_backgrounds[i].onDraw(canvas);
 		if (_squirrel.getAltitude() <= 0) {
 			Log.d("GameView", "game over");
-			_gameThread.setRunning(false);
-			_gameOver = true;
+			//Log.d("GameView",_statusText.toString());
+			//_statusText.setText("Game Over\nAcorns Eaten: " + _acornsEaten);
+			//_statusText.setVisibility(View.VISIBLE);
+			//_gameThread.setRunning(false);
 			return;
 		}
 		_squirrel.onDraw(canvas);
