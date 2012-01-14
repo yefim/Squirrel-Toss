@@ -25,8 +25,16 @@ public class Squirrel extends Sprite {
 		super(bmp);
 	}
 	public boolean intersects(Sprite other) {
-		Rect thisRect = new Rect((int)POS_X, (int)POS_Y, (int)POS_X+_width, (int)POS_Y+_height);
+		int height = this._bmp.getHeight();
+		int width  = this._bmp.getWidth();
+		int pos_x = (int)POS_X;
+		int pos_y = (int)POS_Y;
+		int oneFourthHeight = height/4;
+		int oneFourthWidth = width/4;
+		
+		Rect thisRect = new Rect(pos_x+oneFourthWidth, pos_y+oneFourthHeight, pos_x+width-oneFourthWidth, pos_y+height-oneFourthHeight);
 		Rect otherRect = new Rect((int)other._x, (int)other._y, (int)other._x+_width, (int)other._y+_height);
+		
 		return Rect.intersects(thisRect, otherRect);
 	}
 	
@@ -53,7 +61,7 @@ public class Squirrel extends Sprite {
 		if (this.getAltitude() - PennApps2012Activity.screen_height < 0) {
 			_fallToGround = false;
 		} else {
-			_fallToGround = true;
+			_fallToGround = false;
 		}
 	}
 	public boolean isFallingToGround() {
