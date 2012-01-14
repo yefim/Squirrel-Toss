@@ -33,7 +33,12 @@ public class GameActivity extends Activity implements OnClickListener {
 		this.setContentView(_gameView);
 		_gameView.setOnClickListener((OnClickListener) GameActivity.this);
 		_gameView.setOnTouchListener(_gestureListener);
-		
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Log.d("GameActivity", "back was pressed!");
+		this.finish();
 	}
 	class MyGestureDetector extends SimpleOnGestureListener {
 		@Override

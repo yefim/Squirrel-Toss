@@ -99,10 +99,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		_gameThread.start();
 	}
 
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
 
-	}
+	@Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+           boolean retry = true;
+           _gameThread.setRunning(false);
+           while (retry) {
+                  try {
+                        _gameThread.join();
+                        retry = false;
+                  } catch (InterruptedException e) {
+                  }
+           }
+    }
 
 }
