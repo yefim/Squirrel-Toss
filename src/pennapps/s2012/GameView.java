@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -35,7 +36,19 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	public boolean onTouchEvent(MotionEvent event) {
 		synchronized (event) {
 			/*if (_sprite.isInFreeFall()) {
-				
+				// register swipes
+				if (event.getAction() == MotionEvent.ACTION_MOVE) {
+					int history_size = event.getHistorySize();
+					Log.d("GameView", "history_size: " + history_size);
+					if (history_size > 0) {
+						// the first touch was higher up than the last one
+						if (event.getHistoricalY(0) < event.getHistoricalY(history_size-1)) {
+							_sprite.tiltUp();
+						} else {
+							_sprite.tiltDown();
+						}
+					}
+				}
 			} else {*/
 				if (event.getAction() == MotionEvent.ACTION_MOVE
 						|| event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -45,9 +58,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 					for(int i=0; i<_backgrounds.length; i++)
 						_backgrounds[i].setSpeed(-1 * _sprite.getXSpeed(), -1 * _sprite.getYSpeed());
 				}
-			//}
+			}
 
-		}
+		//}
 		return true;
 	}
 
