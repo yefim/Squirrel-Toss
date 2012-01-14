@@ -37,6 +37,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 				"height:" + this.getHeight() + "\nwidth" + this.getWidth());
 		_backgrounds[0] = new Background(this, bmp, true);
 	}
+	public Sprite getSprite() {
+		return _sprite;
+	}
 
 	protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld) {
 		super.onSizeChanged(xNew, yNew, xOld, yOld);
@@ -54,24 +57,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 	public boolean onTouchEvent(MotionEvent event) {
 		synchronized (event) {
-			if (event.getAction() == MotionEvent.ACTION_MOVE
-					|| event.getAction() == MotionEvent.ACTION_DOWN) {
-				_sprite.setPosition(event.getX(), event.getY());
-			} else if (event.getAction() == MotionEvent.ACTION_UP) {
-				_sprite.inFreeFall();
-				for (int i = 0; i < _backgrounds.length; i++)
-					_backgrounds[i].setSpeed(-1 * _sprite.getXSpeed(), -1
-							* _sprite.getYSpeed());
-			}
-			if (event.getAction() == MotionEvent.ACTION_MOVE
+			if (!_sprite.isInFreeFall()) {
+				if (event.getAction() == MotionEvent.ACTION_MOVE
 						|| event.getAction() == MotionEvent.ACTION_DOWN) {
 					_sprite.setPosition(event.getX(), event.getY());
 				} else if (event.getAction() == MotionEvent.ACTION_UP) {
 					_sprite.inFreeFall();
-					for(int i=0; i<_backgrounds.length; i++)
-						_backgrounds[i].setSpeed(-1 * _sprite.getXSpeed(), -1 * _sprite.getYSpeed());
+					for (int i = 0; i < _backgrounds.length; i++)
+						_backgrounds[i].setSpeed(-1 * _sprite.getXSpeed(), -1
+								* _sprite.getYSpeed());
 				}
 			}
+		}
 		return true;
 	}
 
