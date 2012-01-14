@@ -25,7 +25,7 @@ public class GameThread extends Thread {
 		while (_running) {
 			Canvas c = null;
 			startTime = System.currentTimeMillis();
-			if (_view.getSquirrel().isInFreeFall() && r.nextInt(100) < 15)
+			if (_view.getSquirrel().isInFreeFall() && r.nextInt(100) < 10)
 				_view.addAcorn();
 			ArrayList<Acorn> acorns = _view.getAcorns();
 			for (int i = 0; i < acorns.size(); i++) {

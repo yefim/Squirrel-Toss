@@ -12,10 +12,22 @@ public class Acorn extends Sprite {
 	public Acorn(Bitmap bmp) {
 		super(bmp);
 		Random r = new Random();
-		_x = r.nextInt(PennApps2012Activity.screen_width) + PennApps2012Activity.screen_width/4;
-		_y = -PennApps2012Activity.screen_width/4;
-		_angle_radians = 0.0;
-		_velocity = 1.0;
+		int num = r.nextInt(20);
+		if (num > 15) {
+			_x = r.nextInt(PennApps2012Activity.screen_width / 2);
+			_y = r.nextInt(PennApps2012Activity.screen_width / 10)
+					- PennApps2012Activity.screen_width / 8;
+		} else {
+			_x = r.nextInt(PennApps2012Activity.screen_width)
+					+ PennApps2012Activity.screen_width / 2;
+			if (num < 7)
+				_y = 3 * r.nextInt(PennApps2012Activity.screen_width) / 4;
+			else
+				_y = r.nextInt(PennApps2012Activity.screen_width / 8)
+						- PennApps2012Activity.screen_width / 6;
+		}
+		_angle_radians = Math.PI / 2;
+		_velocity = 5.0;
 	}
 
 	public void setBackgroundVelocity(float xSpeed, float ySpeed) {
@@ -35,15 +47,15 @@ public class Acorn extends Sprite {
 	}
 
 	public boolean onScreen() {
-		return _x > 0 && _y < PennApps2012Activity.screen_height;
+		return _x > 0;
 	}
 
 	@Override
 	public void move() {
 		double xVelocity = _velocity * Math.cos(_angle_radians)
-				+ _backgroundXSpeed;
+				+ _backgroundXSpeed / 2;
 		double yVelocity = _velocity * Math.sin(_angle_radians)
-				+ _backgroundYSpeed;
+				+ _backgroundYSpeed / 2;
 
 		_x += xVelocity;
 		_y += yVelocity;
