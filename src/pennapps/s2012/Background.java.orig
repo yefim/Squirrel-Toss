@@ -43,9 +43,14 @@ public class Background {
 			canvas.drawBitmap(_bmp, 0, _height+_y, null);
 		
 	}
+<<<<<<< Updated upstream
+	public void setSpeed(float speed) {
+		_speed = speed;
+=======
 	
 	public void setSpeed(float xSpeed, float ySpeed) {
 		_xSpeed = xSpeed;
 		_ySpeed = ySpeed;
+>>>>>>> Stashed changes
 	}
 }

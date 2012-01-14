@@ -13,7 +13,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private SurfaceHolder _holder;
 	private GameThread _gameThread;
 	private Sprite _sprite;
-	private Background[] _backgrounds;
+	private Background _background;
 
 	public GameView(Context context) {
 		super(context);
@@ -25,27 +25,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		_sprite = new Sprite(this, bmp);
 		bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.background_stand_in);
-		_backgrounds = new Background[2];
-		_backgrounds[1] = new Background(this, bmp, false);
-		bmp = BitmapFactory.decodeResource(getResources(),
-				R.drawable.sky_stand_in);
-		_backgrounds[0] = new Background(this, bmp, true);
+		_background = new Background(this, bmp);
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
 		synchronized (event) {
-			/*if (_sprite.isInFreeFall()) {
-				
-			} else {*/
-				if (event.getAction() == MotionEvent.ACTION_MOVE
-						|| event.getAction() == MotionEvent.ACTION_DOWN) {
-					_sprite.setPosition(event.getX(), event.getY());
-				} else if (event.getAction() == MotionEvent.ACTION_UP) {
-					_sprite.inFreeFall();
-					for(int i=0; i<_backgrounds.length; i++)
-						_backgrounds[i].setSpeed((-1 * _sprite.getXSpeed()), -1 * _sprite.getYSpeed());
-				}
-			//}
+			if (event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN ) {
+				_sprite.setPosition(event.getX(), event.getY());
+			} else if (event.getAction() == MotionEvent.ACTION_UP) {
+				_sprite.inFreeFall();
+				_background.setSpeed(-1*(float)_sprite.getXSpeed());
+			}
 
 		}
 		return true;
@@ -54,8 +44,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
-		for(int i=0; i<_backgrounds.length; i++)
-			_backgrounds[i].onDraw(canvas);
+		_background.onDraw(canvas);
 		_sprite.onDraw(canvas);
 	}
 
