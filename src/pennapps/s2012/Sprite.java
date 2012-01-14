@@ -10,6 +10,8 @@ public class Sprite {
 	private Bitmap _bmp;
 	private int _width, _height;
 	private boolean _inFreeFall;
+	// dv = dt * a  
+	private final float GRAVITY_DROP = 9.8f/GameThread.FPS;
 
 	public Sprite(GameView gameView, Bitmap bmp) {
 		_gameView = gameView;
@@ -44,8 +46,11 @@ public class Sprite {
 		}
 		_x += _xSpeed;
 		_y += _ySpeed;
+		accelerate();
 	}
-
+	private void accelerate() {
+		this._ySpeed += GRAVITY_DROP;
+	}
 	public void onDraw(Canvas canvas) {
 		if(_inFreeFall)
 			update();
