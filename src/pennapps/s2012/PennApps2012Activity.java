@@ -24,7 +24,6 @@ public class PennApps2012Activity extends Activity implements OnClickListener, O
         screen_height = displaymetrics.heightPixels;
         screen_width = displaymetrics.widthPixels;
         
-        //this.setContentView(R.layout.home_screen_view);
         this.setContentView(R.layout.home_screen_view);
         Button play = (Button) this.findViewById(R.id.btn_play);
         play.setOnClickListener(this);
@@ -37,7 +36,6 @@ public class PennApps2012Activity extends Activity implements OnClickListener, O
 
 	@Override
 	public void onClick(View v) {
-		Log.d("Clicked","in click");
 		Intent intent = new Intent();
         intent.setClass(v.getContext(), GameActivity.class);
         startActivity(intent);

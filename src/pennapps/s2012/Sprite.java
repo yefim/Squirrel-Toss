@@ -15,10 +15,10 @@ public class Sprite {
 	private int _width, _height;
 	private boolean _inFreeFall, _catchingUp;
 	private double _angle_radians = 0.0f;
-	// dv = dt * a  
+	// dv = dt * a
 	private final double GRAVITY_CONSTANT = 4.9;
 	private final double GRAVITY_DROP = GRAVITY_CONSTANT/GameThread.FPS;
-	private final double TILT_ANGLE = 0.5;
+	private final double TILT_ANGLE_RADIANS = 1.0;
 	private final double BOOST = 1.0;
 	private final double SLOW_DOWN = 0.005;
 	private final float POS_X = (float) (PennApps2012Activity.screen_width/4.0);
@@ -60,20 +60,14 @@ public class Sprite {
 		double xVelocity = _velocity*Math.cos(_angle_radians);
 		double yVelocity = _velocity*Math.sin(_angle_radians);
 		
-		/*if (_x > _gameView.getWidth() - _bmp.getWidth() - xVelocity) {
-			_velocity = 0;
-		}
-		if (_x + xVelocity < 0) {
-			_velocity = 0;
-		}*/
 		_x += xVelocity;
 		_y += yVelocity;
 	}
 	public void tiltUp() {
-		_angle_radians += TILT_ANGLE;
+		_angle_radians -= TILT_ANGLE_RADIANS;
 	}
 	public void tiltDown() {
-		_angle_radians -= TILT_ANGLE;
+		_angle_radians += TILT_ANGLE_RADIANS;
 	}
 	public void boost() {
 		_velocity += BOOST;
