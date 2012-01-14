@@ -43,7 +43,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 				} else if (event.getAction() == MotionEvent.ACTION_UP) {
 					_sprite.inFreeFall();
 					for(int i=0; i<_backgrounds.length; i++)
+<<<<<<< Updated upstream
 						_backgrounds[i].setSpeed((-1 * _sprite.getXSpeed()), -1 * _sprite.getYSpeed());
+=======
+						_backgrounds[i].setSpeed(-1 * _sprite.getXSpeed(), -1 * _sprite.getYSpeed());
+>>>>>>> Stashed changes
 				}
 			//}
 
