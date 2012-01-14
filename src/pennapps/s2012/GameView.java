@@ -30,7 +30,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 	public boolean onTouchEvent(MotionEvent event) {
 		synchronized (event) {
-			if (event.getAction() == MotionEvent.ACTION_MOVE) {
+			if (event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN ) {
 				_sprite.setPosition(event.getX(), event.getY());
 			} else if (event.getAction() == MotionEvent.ACTION_UP) {
 				_sprite.inFreeFall();

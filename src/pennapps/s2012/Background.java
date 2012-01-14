@@ -17,18 +17,16 @@ public class Background {
 	}
 
 	private void update() {
-		/*if (_x > _gameView.getWidth() - _bmp.getWidth() - _speed) {
-			_speed = 0;
-		}
-		if (_x + _speed < 0) {
-			_speed = 0;
-		}*/
 		_x += _speed;
+		_x %= _width;
 	}
 
 	public void onDraw(Canvas canvas) {
 		update();
 		canvas.drawBitmap(_bmp, _x, 0, null);
+		if(_width+_x<_gameView.getWidth())
+			canvas.drawBitmap(_bmp, _width+_x, 0, null);
+		
 	}
 
 	public void setSpeed(float speed) {
