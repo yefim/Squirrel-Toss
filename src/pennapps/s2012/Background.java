@@ -30,10 +30,10 @@ public class Background {
 
 	private void update() {
 		if (_leader.isInFreeFall()) {
-			_x -= _leader.getXSpeed();
+			_x -= _leader.getXSpeed()/4;
 			_x %= _width;
 			if (!_leader.isFallingToGround()) {
-				_y -= _leader.getYSpeed();
+				_y -= _leader.getYSpeed()/4;
 				if (_tileUp) {
 					if (_y > _height) {
 						_y %= _height;

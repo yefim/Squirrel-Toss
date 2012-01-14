@@ -65,7 +65,7 @@ public class Squirrel extends Sprite {
 		}
 	}
 	public boolean isFallingToGround() {
-		return _fallToGround;
+		return false;//_fallToGround;
 	}
 	public void move() {
 		_x += _velocity*Math.cos(_angle_radians);
