@@ -3,6 +3,8 @@ package pennapps.s2012;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Rect;
+import android.util.Log;
 
 public abstract class Sprite {
 	float _x = 0, _y = 0;

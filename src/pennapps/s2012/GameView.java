@@ -17,6 +17,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private GameThread _gameThread;
 	private Squirrel _squirrel;
 	private ArrayList<Acorn> _acorns;
+	private int _acornsEaten = 0;
 	private Background[] _backgrounds;
 	private int viewWidth = 0;
 	private int viewHeight = 0;
@@ -83,14 +84,20 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			_backgrounds[i].onDraw(canvas);
 		_squirrel.onDraw(canvas);
 		for (int i = 0; i < _acorns.size(); i++) {
-			_acorns.get(i).onDraw(canvas);
+			if (_squirrel.intersects(_acorns.get(i))) {
+				_acornsEaten += 1;
+				Log.d("GameView","intersected!" + _acornsEaten);
+				_acorns.remove(i);
+				i -= 1;
+			} else {
+				_acorns.get(i).onDraw(canvas);
+			}
 		}
 	}
 
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
-		// TODO Auto-generated method stub
 
 	}
 

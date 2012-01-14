@@ -3,22 +3,30 @@ package pennapps.s2012;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Rect;
 import android.util.Log;
 
 public class Squirrel extends Sprite {
 	private boolean _inFreeFall, _catchingUp;
 	// dv = dt * a
-	private final double GRAVITY_CONSTANT = 4.9;
+	private final double GRAVITY_CONSTANT = 2.5;
 	private final double GRAVITY_DROP = GRAVITY_CONSTANT/GameThread.FPS;
-	private final double TILT_ANGLE_RADIANS = 1.0;
+	private final double TILT_ANGLE_RADIANS = 0.5;
 	private final double BOOST = 1.0;
 	private final double SLOW_DOWN = 0.005;
 	private final float POS_X = (float) (PennApps2012Activity.screen_width/4.0);
 	private final float POS_Y = (float) (PennApps2012Activity.screen_height/2.0);
+	private final double MAX_MIN_ANGLE = 75.0;
 	static final double CATCH_UP_SPEED = 5.0;
+	
 
 	public Squirrel(Bitmap bmp) {
 		super(bmp);
+	}
+	public boolean intersects(Sprite other) {
+		Rect thisRect = new Rect((int)POS_X, (int)POS_Y, (int)POS_X+_width, (int)POS_Y+_height);
+		Rect otherRect = new Rect((int)other._x, (int)other._y, (int)other._x+_width, (int)other._y+_height);
+		return Rect.intersects(thisRect, otherRect);
 	}
 	
 	public void setPosition(double x, double y) {
@@ -50,9 +58,11 @@ public class Squirrel extends Sprite {
 		_y += yVelocity;
 	}
 	public void tiltUp() {
+		if (_angle_radians <= Math.toRadians(-MAX_MIN_ANGLE)) return;
 		_angle_radians -= TILT_ANGLE_RADIANS;
 	}
 	public void tiltDown() {
+		if (_angle_radians >= Math.toRadians(MAX_MIN_ANGLE)) return;
 		_angle_radians += TILT_ANGLE_RADIANS;
 	}
 	public void boost() {
