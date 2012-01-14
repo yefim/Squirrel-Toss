@@ -30,9 +30,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		_squirrel = new Squirrel(bmp);
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.background_stand_in);
 		_backgrounds = new Background[2];
-		_backgrounds[1] = new Background(this, bmp, false);
+		_backgrounds[1] = new Background(this, bmp, _squirrel, false);
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.sky_stand_in);
-		_backgrounds[0] = new Background(this, bmp, true);
+		_backgrounds[0] = new Background(this, bmp, _squirrel, true);
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.acorn);
 		_acorns = new ArrayList<Acorn>();
 		setUpAcorns(bmp);
