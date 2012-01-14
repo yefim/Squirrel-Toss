@@ -82,8 +82,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		for (int i = 0; i < _backgrounds.length; i++)
 			_backgrounds[i].onDraw(canvas);
 		_squirrel.onDraw(canvas);
-		for (Acorn a : _acorns)
-			a.onDraw(canvas);
+		for (int i = 0; i < _acorns.size(); i++) {
+			_acorns.get(i).onDraw(canvas);
+		}
 	}
 
 	@Override
