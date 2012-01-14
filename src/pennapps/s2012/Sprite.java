@@ -13,7 +13,7 @@ public class Sprite {
 	private Bitmap _bmp;
 	private Matrix _matrix;
 	private int _width, _height;
-	private boolean _inFreeFall;
+	private boolean _inFreeFall, _catchingUp;
 	private double _angle_radians = 0.0f;
 	// dv = dt * a  
 	private final double GRAVITY_CONSTANT = 4.9;
@@ -21,6 +21,9 @@ public class Sprite {
 	private final double TILT_ANGLE = 0.5;
 	private final double BOOST = 1.0;
 	private final double SLOW_DOWN = 0.005;
+	private final float POS_X = (float) (PennApps2012Activity.screen_width/4.0);
+	private final float POS_Y = (float) (PennApps2012Activity.screen_height/2.0);
+	static final double CATCH_UP_SPEED = 5.0;
 
 	public Sprite(GameView gameView, Bitmap bmp) {
 		_gameView = gameView;
@@ -57,12 +60,12 @@ public class Sprite {
 		double xVelocity = _velocity*Math.cos(_angle_radians);
 		double yVelocity = _velocity*Math.sin(_angle_radians);
 		
-		if (_x > _gameView.getWidth() - _bmp.getWidth() - xVelocity) {
+		/*if (_x > _gameView.getWidth() - _bmp.getWidth() - xVelocity) {
 			_velocity = 0;
 		}
 		if (_x + xVelocity < 0) {
 			_velocity = 0;
-		}
+		}*/
 		_x += xVelocity;
 		_y += yVelocity;
 	}
@@ -102,7 +105,7 @@ public class Sprite {
 	private void rotate() {
 		float rotation_degrees = (float)Math.toDegrees(_angle_radians);
 		_matrix.setRotate(rotation_degrees,_bmp.getWidth()/2,_bmp.getHeight()/2);
-		_matrix.postTranslate(_x,_y);
+		_matrix.postTranslate(POS_X, POS_Y);
 	}
 	
 	public float getYSpeed() {
