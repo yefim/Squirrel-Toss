@@ -30,12 +30,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.background_stand_in);
 		_backgrounds = new Background[2];
-		_backgrounds[1] = new Background(this, bmp, false);
+		_backgrounds[1] = new Background(this, bmp, _sprite, false);
 		bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.sky_stand_in);
 		Log.d("GameView",
 				"height:" + this.getHeight() + "\nwidth" + this.getWidth());
-		_backgrounds[0] = new Background(this, bmp, true);
+		_backgrounds[0] = new Background(this, bmp, _sprite, true);
 	}
 
 	protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld) {

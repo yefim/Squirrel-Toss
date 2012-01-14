@@ -13,28 +13,34 @@ public class Background {
 	private int _width;
 	private boolean _tileUp = false;
 	private int _height;
-	public Background(GameView gameView, Bitmap bmp) {
+	private Sprite _leader;
+
+	public Background(GameView gameView, Sprite leader, Bitmap bmp) {
 		_gameView = gameView;
 		_bmp = bmp;
 		_width = bmp.getWidth();
 		_height = bmp.getHeight();
+		_leader = leader;
 		_y = PennApps2012Activity.screen_height - _height;
 	}
 
-	public Background(GameView gameView, Bitmap bmp, boolean tileUp) {
-		this(gameView, bmp);
+	public Background(GameView gameView, Bitmap bmp, Sprite leader,
+			boolean tileUp) {
+		this(gameView, leader, bmp);
 		_tileUp = tileUp;
 	}
 
 	private void update() {
-		_x += _xSpeed;
-		_x %= _width;
-		_y += _ySpeed;
-		if (_tileUp){
-			if(_y > _height){
-				Log.d("Background", "y: "+_y + "x: "+_x);
-				_y %= _height;
-				Log.d("Background", "y: "+_y + "x: "+_x);
+		if (_leader.isInFreeFall()) {
+			_x -= _leader.getXSpeed();
+			_x %= _width;
+			_y -= _leader.getYSpeed();
+			if (_tileUp) {
+				if (_y > _height) {
+					Log.d("Background", "y: " + _y + "x: " + _x);
+					_y %= _height;
+					Log.d("Background", "y: " + _y + "x: " + _x);
+				}
 			}
 		}
 	}
@@ -45,8 +51,10 @@ public class Background {
 		if (_width + _x < _gameView.getWidth())
 			canvas.drawBitmap(_bmp, _width + _x, _y, null);
 		if (_tileUp) {
-			canvas.drawBitmap(_bmp, _x, _y + - PennApps2012Activity.screen_height, null);
-			canvas.drawBitmap(_bmp, _width + _x, _y + - PennApps2012Activity.screen_height, null);
+			canvas.drawBitmap(_bmp, _x, _y
+					+ -PennApps2012Activity.screen_height, null);
+			canvas.drawBitmap(_bmp, _width + _x, _y
+					+ -PennApps2012Activity.screen_height, null);
 		}
 
 	}
