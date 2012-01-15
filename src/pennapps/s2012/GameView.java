@@ -150,13 +150,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		if(_squirrel.isStopped()) { 
 			Paint paint = new Paint(); 
 			paint.setColor(Color.WHITE); 
-			canvas.drawRect(PennApps2012Activity.screen_width/4, PennApps2012Activity.screen_height/8, 3*PennApps2012Activity.screen_width/4, PennApps2012Activity.screen_height*7/8, paint);
+			Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.game_over);
+			canvas.drawBitmap(bmp, PennApps2012Activity.screen_width*3/8-20, PennApps2012Activity.screen_height*3/8, null);
+			//canvas.drawRect(PennApps2012Activity.screen_width*3/8-20, PennApps2012Activity.screen_height*3/8, 5*PennApps2012Activity.screen_width/8+20, PennApps2012Activity.screen_height*5/8, paint);
 			paint.setColor(Color.BLACK); 
 			paint.setTextSize(60); 
-			canvas.drawText("Game Over", PennApps2012Activity.screen_width*3/8, PennApps2012Activity.screen_height/4, paint);
+			paint.setARGB(255, 52, 143, 188);
+			canvas.drawText("Game Over", PennApps2012Activity.screen_width*3/8, PennApps2012Activity.screen_height*4/8, paint);
+			
 			paint.setTextSize(30); 
-			canvas.drawText("Number of Acorns Eaten:"+_acornsEaten, PennApps2012Activity.screen_width*3/8, PennApps2012Activity.screen_height/2, paint);
-			canvas.drawText("Distance: "+_squirrel.getDistance(), PennApps2012Activity.screen_width*3/8, PennApps2012Activity.screen_height*5/8, paint);
+			canvas.drawText("Acorns: "+_acornsEaten, PennApps2012Activity.screen_width*3/8+80, PennApps2012Activity.screen_height*9/16, paint);
 		}
 	}
 	
