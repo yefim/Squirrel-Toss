@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -147,16 +148,25 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			_acorns.get(i).onDraw(canvas);
 		}
 		_scorebar.onDraw(canvas);
+		if(!_squirrel.isInFreeFall()){
+			Paint paint = new Paint();
+			paint.setColor(Color.BLACK);
+			paint.setTextSize(60);
+			paint.setTypeface(Typeface.MONOSPACE);
+			canvas.drawText("Toss that squirrel!", PennApps2012Activity.screen_width/4, PennApps2012Activity.screen_height/4, paint);
+		}
+			
 		if(_squirrel.isStopped()) { 
 			Paint paint = new Paint(); 
 			paint.setColor(Color.WHITE); 
+			paint.setTypeface(Typeface.MONOSPACE);
 			Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.game_over);
 			canvas.drawBitmap(bmp, PennApps2012Activity.screen_width*3/8-20, PennApps2012Activity.screen_height*3/8, null);
 			//canvas.drawRect(PennApps2012Activity.screen_width*3/8-20, PennApps2012Activity.screen_height*3/8, 5*PennApps2012Activity.screen_width/8+20, PennApps2012Activity.screen_height*5/8, paint);
 			paint.setColor(Color.BLACK); 
 			paint.setTextSize(60); 
 			paint.setARGB(255, 52, 143, 188);
-			canvas.drawText("Game Over", PennApps2012Activity.screen_width*3/8, PennApps2012Activity.screen_height*4/8, paint);
+			canvas.drawText("Game Over", PennApps2012Activity.screen_width*3/8 - 10, PennApps2012Activity.screen_height*4/8, paint);
 			
 			paint.setTextSize(30); 
 			canvas.drawText("Acorns: "+_acornsEaten, PennApps2012Activity.screen_width*3/8+80, PennApps2012Activity.screen_height*9/16, paint);
