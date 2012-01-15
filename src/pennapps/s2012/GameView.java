@@ -150,7 +150,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		if(_squirrel.isStopped()) { 
 			Paint paint = new Paint(); 
 			paint.setColor(Color.WHITE); 
-			Log.d("GameView", ""+(PennApps2012Activity.screen_width*3/8-20)+" "+(5*PennApps2012Activity.screen_width/8+20)+" "+PennApps2012Activity.screen_height*3/8+" "+PennApps2012Activity.screen_height*5/8);
+			Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.game_over);
+			canvas.drawBitmap(bmp, PennApps2012Activity.screen_width*3/8-20, PennApps2012Activity.screen_height*3/8, null);
 			//canvas.drawRect(PennApps2012Activity.screen_width*3/8-20, PennApps2012Activity.screen_height*3/8, 5*PennApps2012Activity.screen_width/8+20, PennApps2012Activity.screen_height*5/8, paint);
 			paint.setColor(Color.BLACK); 
 			paint.setTextSize(60); 
