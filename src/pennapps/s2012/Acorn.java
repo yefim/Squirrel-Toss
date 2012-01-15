@@ -47,7 +47,7 @@ public class Acorn extends Sprite {
 	}
 
 	public boolean onScreen() {
-		return _x > 0;
+		return _x + _width > 0;
 	}
 
 	@Override

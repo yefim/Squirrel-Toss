@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class SplashActivity extends Activity {
 	boolean _active = true;
-	int _splashTime = 3000;
+	int _splashTime = 5000;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

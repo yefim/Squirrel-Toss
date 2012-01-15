@@ -8,17 +8,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.widget.TextView;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private SurfaceHolder _holder;
@@ -157,7 +153,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			paint.setColor(Color.WHITE); 
 			paint.setTypeface(Typeface.MONOSPACE);
 			Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.game_over);
-			canvas.drawBitmap(bmp, HomeScreenActivity.screen_width*3/8-20, HomeScreenActivity.screen_height*3/8, null);
+			canvas.drawBitmap(bmp, HomeScreenActivity.screen_width*3/8-15, HomeScreenActivity.screen_height*3/8, null);
 			//canvas.drawRect(PennApps2012Activity.screen_width*3/8-20, PennApps2012Activity.screen_height*3/8, 5*PennApps2012Activity.screen_width/8+20, PennApps2012Activity.screen_height*5/8, paint);
 			paint.setColor(Color.BLACK); 
 			paint.setTextSize(60); 
@@ -190,6 +186,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 				_gameThread.join();
 				retry = false;
 			} catch (InterruptedException e) {
+				
 			}
 		}
 	}

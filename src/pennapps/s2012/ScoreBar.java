@@ -35,7 +35,7 @@ public class ScoreBar {
 		scores.setTextSize(30);
 		scores.setTypeface(Typeface.MONOSPACE);
 		String scoresText = this.getScoresText();
-		c.drawText(scoresText, 30, 30, scores);
+		c.drawText(scoresText, 10, 30, scores);
 	}
 	private String getScoresText() {
 		NumberFormat f = new DecimalFormat("#0.00");
@@ -43,7 +43,7 @@ public class ScoreBar {
 		double alt  = _squirrel.getAltitude()/ALTITUDE_SCALE;
 		double dist =_squirrel.getDistance()/DISTANCE_SCALE;
 		int fuel = _squirrel.getFuel();
-		return "Velocity: " + f.format(vel) + " m/s    Altitude: " + f.format(alt) + " m    Distance: " + f.format(dist) + " m    Fuel: " + fuel + "%"; 
+		return "Velocity: " + f.format(vel) + " m/s Altitude: " + f.format(alt) + " m Distance: " + f.format(dist) + " m Fuel: " + fuel + "%"; 
 	}
 	
 }

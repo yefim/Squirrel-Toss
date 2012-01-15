@@ -88,8 +88,10 @@ public class Squirrel extends Sprite {
 		if (_done) {
 			_x += getXSpeed() / 8;
 			_velocity -= 8;
-			if (_velocity < 0) 
+			if (_velocity <= 0) {
+				_velocity = 0;
 				_stop = true;
+			}
 		}
 		_x += _velocity * Math.cos(_angle_radians) / 4;
 		_y += _velocity * Math.sin(_angle_radians) / 4;
