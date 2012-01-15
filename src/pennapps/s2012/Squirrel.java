@@ -7,15 +7,15 @@ import android.util.Log;
 
 public class Squirrel extends Sprite {
 	private int _fuel = 100;
-	private boolean _inFreeFall, _catchingUp, _nearGround = true;
+	private boolean _inFreeFall, _nearGround = true;
 	// dv = dt * a
-	private final double GRAVITY_CONSTANT = 4.9;
+	private final double GRAVITY_CONSTANT = 9.8;
 	private final double GRAVITY_DROP = GRAVITY_CONSTANT / GameThread.FPS;
-	private final double TILT_ANGLE_RADIANS = 0.1;
+	private final double TILT_ANGLE_RADIANS = 0.2;
 	private final double BOOST = 1.0;
 	private final double SLOW_DOWN = 0.01;
-	private final float POS_X = (float) (PennApps2012Activity.screen_width / 4.0);
-	private final float POS_Y = (float) (PennApps2012Activity.screen_height / 2.0);
+	private final float POS_X = (float) (HomeScreenActivity.screen_width / 4.0);
+	private final float POS_Y = (float) (HomeScreenActivity.screen_height / 2.0);
 	private final double MAX_MIN_ANGLE = 65.0;
 	private float _bottom;
 	private boolean _done;
@@ -25,7 +25,7 @@ public class Squirrel extends Sprite {
 	public Squirrel(Bitmap bmp) {
 		super(bmp);
 		_x = 0;
-		_y = PennApps2012Activity.screen_height-80;
+		_y = HomeScreenActivity.screen_height-80;
 	}
 
 	public boolean intersects(Sprite other) {
@@ -105,14 +105,14 @@ public class Squirrel extends Sprite {
 		if (_done || _angle_radians <= Math.toRadians(-MAX_MIN_ANGLE) || _fuel <= 0)
 			return;
 		_angle_radians -= TILT_ANGLE_RADIANS;
-		_fuel -= 1;
+		_fuel -= 5;
 	}
 
 	public void tiltDown() {
 		if (_done || _angle_radians >= Math.toRadians(MAX_MIN_ANGLE) || _fuel <= 0)
 			return;
 		_angle_radians += TILT_ANGLE_RADIANS;
-		_fuel -= 1;
+		_fuel -= 5;
 	}
 	public void increaseVelocity() {
 		_velocity += 60 * SLOW_DOWN;

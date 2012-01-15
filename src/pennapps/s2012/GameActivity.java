@@ -32,7 +32,6 @@ public class GameActivity extends Activity implements OnClickListener {
 		
 		_gameView = new GameView(this);
 		this.setContentView(_gameView);
-		_gameView.setTextView((TextView) findViewById(R.id.text));
 		_gameView.setOnClickListener((OnClickListener) GameActivity.this);
 		_gameView.setOnTouchListener(_gestureListener);
 	}
@@ -53,8 +52,7 @@ public class GameActivity extends Activity implements OnClickListener {
 					_gameView.getSquirrel().tiltUp();
 				} else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
 					_gameView.getSquirrel().tiltDown();
-				}
-					
+				}				
 			} catch (Exception e) {
 				// do nothing
 			}

@@ -5,14 +5,9 @@ import java.text.NumberFormat;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.FontMetrics;
-import android.graphics.Picture;
 
 public class ScoreBar {
-	private int level;
-	private double score;
 	private Squirrel _squirrel;
 	private Bitmap _bmp;
 	private final double VELOCITY_SCALE = 5.0;
@@ -25,7 +20,6 @@ public class ScoreBar {
 	}
 	
 	public void onDraw(Canvas canvas) {
-		update();
 		paintBar(canvas);
 		paintScores(canvas);
 	}
@@ -37,11 +31,7 @@ public class ScoreBar {
 		scores.setARGB(255, 52, 143, 188);
 		scores.setTextSize(30);
 		String scoresText = this.getScoresText();
-		
-		c.drawText(scoresText, 10, 30, scores);
-	}
-	private void update() {
-		
+		c.drawText(scoresText, 30, 30, scores);
 	}
 	private String getScoresText() {
 		NumberFormat f = new DecimalFormat("#0.00");
@@ -49,7 +39,7 @@ public class ScoreBar {
 		double alt  = _squirrel.getAltitude()/ALTITUDE_SCALE;
 		double dist =_squirrel.getDistance()/DISTANCE_SCALE;
 		int fuel = _squirrel.getFuel();
-		return "Velocity: " + f.format(vel) + " Altitude: " + f.format(alt) + " Distance: " + f.format(dist) + " Fuel: " + fuel + "%"; 
+		return "Velocity: " + f.format(vel) + " m/s    Altitude: " + f.format(alt) + " m    Distance: " + f.format(dist) + " m    Fuel: " + fuel + "%"; 
 	}
 	
 }

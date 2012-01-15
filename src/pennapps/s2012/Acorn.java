@@ -14,17 +14,17 @@ public class Acorn extends Sprite {
 		Random r = new Random();
 		int num = r.nextInt(20);
 		if (num > 15) {
-			_x = r.nextInt(PennApps2012Activity.screen_width / 2);
-			_y = r.nextInt(PennApps2012Activity.screen_width / 10)
-					- PennApps2012Activity.screen_width / 8;
+			_x = r.nextInt(HomeScreenActivity.screen_width / 2);
+			_y = r.nextInt(HomeScreenActivity.screen_width / 10)
+					- HomeScreenActivity.screen_width / 8;
 		} else {
-			_x = r.nextInt(PennApps2012Activity.screen_width)
-					+ PennApps2012Activity.screen_width / 2;
+			_x = r.nextInt(HomeScreenActivity.screen_width)
+					+ HomeScreenActivity.screen_width / 2;
 			if (num < 7)
-				_y = 3 * r.nextInt(PennApps2012Activity.screen_width) / 4;
+				_y = 3 * r.nextInt(HomeScreenActivity.screen_width) / 4;
 			else
-				_y = r.nextInt(PennApps2012Activity.screen_width / 8)
-						- PennApps2012Activity.screen_width / 6;
+				_y = r.nextInt(HomeScreenActivity.screen_width / 8)
+						- HomeScreenActivity.screen_width / 6;
 		}
 		_angle_radians = Math.PI / 2;
 		_velocity = 5.0;

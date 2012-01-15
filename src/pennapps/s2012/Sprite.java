@@ -38,7 +38,7 @@ public abstract class Sprite {
 	}
 
 	public float getAltitude() {
-		return -(_y - PennApps2012Activity.screen_height);
+		return -(_y - HomeScreenActivity.screen_height);
 	}
 
 	public abstract void onDraw(Canvas canvas);

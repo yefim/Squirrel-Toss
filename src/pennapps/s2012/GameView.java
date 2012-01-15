@@ -22,7 +22,6 @@ import android.widget.TextView;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private SurfaceHolder _holder;
 	private GameThread _gameThread;
-    private TextView _statusText;
 	private Squirrel _squirrel;
 	
 	private SoundPool sounds;
@@ -98,9 +97,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	public Squirrel getSquirrel() {
 		return _squirrel;
 	}
-	public void setTextView(TextView newView) {
-        _statusText = newView;
-    }
 	protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld) {
 		super.onSizeChanged(xNew, yNew, xOld, yOld);
 		viewWidth = xNew;
@@ -151,22 +147,21 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			Paint paint = new Paint(); 
 			paint.setColor(Color.WHITE); 
 			Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.game_over);
-			canvas.drawBitmap(bmp, PennApps2012Activity.screen_width*3/8-20, PennApps2012Activity.screen_height*3/8, null);
+			canvas.drawBitmap(bmp, HomeScreenActivity.screen_width*3/8-20, HomeScreenActivity.screen_height*3/8, null);
 			//canvas.drawRect(PennApps2012Activity.screen_width*3/8-20, PennApps2012Activity.screen_height*3/8, 5*PennApps2012Activity.screen_width/8+20, PennApps2012Activity.screen_height*5/8, paint);
 			paint.setColor(Color.BLACK); 
 			paint.setTextSize(60); 
 			paint.setARGB(255, 52, 143, 188);
-			canvas.drawText("Game Over", PennApps2012Activity.screen_width*3/8, PennApps2012Activity.screen_height*4/8, paint);
+			canvas.drawText("Game Over", HomeScreenActivity.screen_width*3/8, HomeScreenActivity.screen_height*4/8, paint);
 			
 			paint.setTextSize(30); 
-			canvas.drawText("Acorns: "+_acornsEaten, PennApps2012Activity.screen_width*3/8+80, PennApps2012Activity.screen_height*9/16, paint);
+			canvas.drawText("Acorns: "+_acornsEaten, HomeScreenActivity.screen_width*3/8+80, HomeScreenActivity.screen_height*9/16, paint);
 		}
 	}
 	
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
-
 	}
 
 	@Override

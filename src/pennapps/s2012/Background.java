@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.util.Log;
 
 public class Background {
-	final private float SLOW_CONSTANT = 0.5f;
 	private float _x = 0, _y = 0;
 	private GameView _gameView;
 	private Bitmap _bmp;
@@ -20,7 +19,7 @@ public class Background {
 		_width = bmp.getWidth();
 		_height = bmp.getHeight();
 		_leader = leader;
-		_y = PennApps2012Activity.screen_height - _height;
+		_y = HomeScreenActivity.screen_height - _height;
 	}
 
 	public Background(GameView gameView, Bitmap bmp, Squirrel leader,
@@ -50,7 +49,7 @@ public class Background {
 			canvas.drawBitmap(_bmp, _width + _x, _y, null);
 		}
 		if (_tileUp) {
-			if (_y + _height > PennApps2012Activity.screen_height) {
+			if (_y + _height > HomeScreenActivity.screen_height) {
 				canvas.drawBitmap(_bmp, _x, _y - _height, null);
 				canvas.drawBitmap(_bmp, _width + _x, _y - _height, null);
 			} else {

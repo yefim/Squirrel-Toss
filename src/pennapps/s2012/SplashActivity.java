@@ -29,7 +29,7 @@ public class SplashActivity extends Activity {
 				} finally {
 					finish();
 					Intent intent = new Intent();
-					intent.setClass(SplashActivity.this, PennApps2012Activity.class); 
+					intent.setClass(SplashActivity.this, HomeScreenActivity.class); 
 					startActivity(intent);
 				}
 			}
