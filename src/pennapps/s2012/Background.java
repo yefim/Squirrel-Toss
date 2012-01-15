@@ -33,7 +33,6 @@ public class Background {
 		if (_leader.isInFreeFall()) {
 			if (!_leader.isDone())
 				_x -= _leader.getXSpeed() / 4;
-
 			_x %= _width;
 			if (!_leader.isNearGround()) {
 				_y -= _leader.getYSpeed() / 4;

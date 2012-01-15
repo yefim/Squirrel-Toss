@@ -68,13 +68,12 @@ public class Squirrel extends Sprite {
 		accelerate_due_to_gravity();
 		decelerate();
 		rotate();
-		if (_bottom < 400)
+		if (_bottom < 340)
 			_nearGround = true;
 		else
 			_nearGround = false;
 		if (_y <= POS_Y)
 			_nearGround = false;
-		Log.d("Squirrel", "Bottom: "+_bottom);
 	}
 
 	public boolean isNearGround() {
@@ -88,9 +87,8 @@ public class Squirrel extends Sprite {
 	public void move() {
 		if (_done) {
 			_x += getXSpeed() / 8;
-			Log.d("Squirrel", "about to slow");
 			_velocity -= 8;
-			if (_velocity < 0)
+			if (_velocity < 0) 
 				_stop = true;
 		}
 		_x += _velocity * Math.cos(_angle_radians) / 4;
@@ -150,7 +148,9 @@ public class Squirrel extends Sprite {
 	}
 
 	public void onDraw(Canvas canvas) {
-		if (_inFreeFall) {
+		if(_stop)
+			canvas.drawBitmap(_bmp, _matrix, null);
+		else if (_inFreeFall) {
 			update();
 			canvas.drawBitmap(_bmp, _matrix, null);
 		} else {
