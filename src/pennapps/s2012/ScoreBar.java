@@ -6,6 +6,9 @@ import java.text.NumberFormat;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.graphics.Paint.FontMetrics;
+import android.graphics.Picture;
 
 public class ScoreBar {
 	private Squirrel _squirrel;
@@ -30,6 +33,7 @@ public class ScoreBar {
 		Paint scores = new Paint();
 		scores.setARGB(255, 52, 143, 188);
 		scores.setTextSize(30);
+		scores.setTypeface(Typeface.MONOSPACE);
 		String scoresText = this.getScoresText();
 		c.drawText(scoresText, 30, 30, scores);
 	}
