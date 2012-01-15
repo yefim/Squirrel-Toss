@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.util.Log;
 
 public class Background {
+	final private float SLOW_CONSTANT = 0.5f;
 	private float _x = 0, _y = 0;
 	private GameView _gameView;
 	private Bitmap _bmp;
@@ -30,14 +31,14 @@ public class Background {
 
 	private void update() {
 		if (_leader.isInFreeFall()) {
-			_x -= _leader.getXSpeed()/4;
+			if (!_leader.isDone())
+				_x -= _leader.getXSpeed() / 4;
+
 			_x %= _width;
-			if (!_leader.isFallingToGround()) {
-				_y -= _leader.getYSpeed()/4;
+			if (!_leader.isNearGround()) {
+				_y -= _leader.getYSpeed() / 4;
 				if (_tileUp) {
-					if (_y > _height) {
-						_y %= _height;
-					}
+					_y %= _height;
 				}
 			}
 		}
@@ -49,15 +50,25 @@ public class Background {
 		if (_width + _x < _gameView.getWidth())
 			canvas.drawBitmap(_bmp, _width + _x, _y, null);
 		if (_tileUp) {
-			canvas.drawBitmap(_bmp, _x, _y
-					+ -PennApps2012Activity.screen_height, null);
-			canvas.drawBitmap(_bmp, _width + _x, _y
-					+ -PennApps2012Activity.screen_height, null);
+			if (_y + _height > PennApps2012Activity.screen_height) {
+				canvas.drawBitmap(_bmp, _x, _y - _height, null);
+				canvas.drawBitmap(_bmp, _width + _x, _y - _height, null);
+			} else {
+				canvas.drawBitmap(_bmp, _x, _y + _height, null);
+				canvas.drawBitmap(_bmp, _width + _x, _y + _height, null);
+				Log.d("Background", "new Y: " + (_y + _height));
+			}
 		}
 	}
+
+	public float getY() {
+		return _y;
+	}
+
 	public float getXSpeed() {
 		return -_leader.getXSpeed();
 	}
+
 	public float getYSpeed() {
 		return -_leader.getYSpeed();
 	}

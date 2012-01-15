@@ -22,7 +22,7 @@ public class GameThread extends Thread {
 	public void run() {
 		long ticksPS = 1000 / FPS, startTime, sleepTime;
 		Random r = new Random();
-		while (_running) {
+		while (_running && !_view.getSquirrel().isStopped()) {
 			Canvas c = null;
 			startTime = System.currentTimeMillis();
 			if (_view.getSquirrel().isInFreeFall() && r.nextInt(100) < 10)
@@ -42,6 +42,7 @@ public class GameThread extends Thread {
 					i -= 1;
 				}
 			}
+			_view.getSquirrel().setBottom( _view.getBackgrounds()[1].getY());
 			try {
 				c = _view.getHolder().lockCanvas();
 				synchronized (_view.getHolder()) {

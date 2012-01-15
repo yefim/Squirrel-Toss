@@ -140,7 +140,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		for (int i = 0; i < _backgrounds.length; i++)
 			_backgrounds[i].onDraw(canvas);
 		if (_squirrel.getAltitude() <= 0) {
-			Log.d("GameView", "game over");
 			//Log.d("GameView",_statusText.toString());
 			//_statusText.setText("Game Over\nAcorns Eaten: " + _acornsEaten);
 			//_statusText.setVisibility(View.VISIBLE);
@@ -152,6 +151,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			_acorns.get(i).onDraw(canvas);
 		}
 		_scorebar.onDraw(canvas);
+	}
+	
+	public void gameOver() {
+		Log.d("GameView",_statusText.toString());
+		_gameThread.setRunning(false);
 	}
 
 	@Override
@@ -183,6 +187,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		sounds.release();
 		music.stop();
 		music.release();
+	}
+	public Background[] getBackgrounds() {
+		return _backgrounds;
 	}
 
 }
