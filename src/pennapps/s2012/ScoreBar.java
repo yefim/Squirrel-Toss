@@ -49,7 +49,7 @@ public class ScoreBar {
 		double alt  = _squirrel.getAltitude()/ALTITUDE_SCALE;
 		double dist =_squirrel.getDistance()/DISTANCE_SCALE;
 		int fuel = _squirrel.getFuel();
-		return "Vel: " + f.format(vel) + " Alt: " + f.format(alt) + " Dist: " + f.format(dist) + " Fuel: " + fuel + "%"; 
+		return "Velocity: " + f.format(vel) + " Altitude: " + f.format(alt) + " Distance: " + f.format(dist) + " Fuel: " + fuel + "%"; 
 	}
 	
 }
