@@ -25,6 +25,8 @@ public class Squirrel extends Sprite {
 
 	public Squirrel(Bitmap bmp) {
 		super(bmp);
+		_x = 0;
+		_y = PennApps2012Activity.screen_height-80;
 	}
 
 	public boolean intersects(Sprite other) {
@@ -67,12 +69,13 @@ public class Squirrel extends Sprite {
 		accelerate_due_to_gravity();
 		decelerate();
 		rotate();
-		if (_bottom < 80)
+		if (_bottom < 400)
 			_nearGround = true;
 		else
 			_nearGround = false;
 		if (_y <= POS_Y)
 			_nearGround = false;
+		Log.d("Squirrel", "Bottom: "+_bottom);
 	}
 
 	public boolean isNearGround() {
@@ -159,7 +162,7 @@ public class Squirrel extends Sprite {
 				_matrix.postTranslate(_x, _y);
 			else
 				_matrix.postTranslate(POS_X, _y);
-		else 
+		else
 			_matrix.postTranslate(POS_X, POS_Y);
 	}
 

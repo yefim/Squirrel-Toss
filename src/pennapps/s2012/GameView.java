@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -136,6 +138,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		if(_squirrel.isStopped()) { 
+			Paint paint = new Paint(); 
+			paint.setColor(Color.BLACK); 
+			paint.setTextSize(20); 
+			canvas.drawText("Game Over", 100, 250, paint); 
+		}
 		canvas.drawColor(Color.BLACK);
 		for (int i = 0; i < _backgrounds.length; i++)
 			_backgrounds[i].onDraw(canvas);
@@ -154,8 +162,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	}
 	
 	public void gameOver() {
-		Log.d("GameView",_statusText.toString());
 		_gameThread.setRunning(false);
+		Canvas c = null;
+		try {
+			c = getHolder().lockCanvas();
+			synchronized (getHolder()) {
+				onDraw(c);
+			}
+		} finally {
+			if (c != null) {
+				getHolder().unlockCanvasAndPost(c);
+			}
+		}
 	}
 
 	@Override

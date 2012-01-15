@@ -47,8 +47,9 @@ public class Background {
 	public void onDraw(Canvas canvas) {
 		update();
 		canvas.drawBitmap(_bmp, _x, _y, null);
-		if (_width + _x < _gameView.getWidth())
+		if (_width + _x < _gameView.getWidth()) {
 			canvas.drawBitmap(_bmp, _width + _x, _y, null);
+		}
 		if (_tileUp) {
 			if (_y + _height > PennApps2012Activity.screen_height) {
 				canvas.drawBitmap(_bmp, _x, _y - _height, null);
@@ -56,7 +57,6 @@ public class Background {
 			} else {
 				canvas.drawBitmap(_bmp, _x, _y + _height, null);
 				canvas.drawBitmap(_bmp, _width + _x, _y + _height, null);
-				Log.d("Background", "new Y: " + (_y + _height));
 			}
 		}
 	}
