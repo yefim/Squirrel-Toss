@@ -2,7 +2,6 @@ package pennapps.s2012;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.util.Log;
 
@@ -105,14 +104,14 @@ public class Squirrel extends Sprite {
 	}
 
 	public void tiltUp() {
-		if (_done || _angle_radians <= Math.toRadians(-MAX_MIN_ANGLE))
+		if (_done || _angle_radians <= Math.toRadians(-MAX_MIN_ANGLE) || _fuel <= 0)
 			return;
 		_angle_radians -= TILT_ANGLE_RADIANS;
 		_fuel -= 1;
 	}
 
 	public void tiltDown() {
-		if (_done || _angle_radians >= Math.toRadians(MAX_MIN_ANGLE))
+		if (_done || _angle_radians >= Math.toRadians(MAX_MIN_ANGLE) || _fuel <= 0)
 			return;
 		_angle_radians += TILT_ANGLE_RADIANS;
 		_fuel -= 1;
@@ -122,6 +121,7 @@ public class Squirrel extends Sprite {
 	}
 	
 	public void boost() {
+		if (_fuel <= 0) return;
 		_velocity += BOOST;
 		_fuel -= 1;
 	}

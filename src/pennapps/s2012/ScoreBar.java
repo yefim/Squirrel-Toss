@@ -48,8 +48,8 @@ public class ScoreBar {
 		double vel  = _squirrel.getVelocity()/VELOCITY_SCALE;
 		double alt  = _squirrel.getAltitude()/ALTITUDE_SCALE;
 		double dist =_squirrel.getDistance()/DISTANCE_SCALE;
-		double fuel = _squirrel.getFuel() / 100;
-		return "Vel: " + f.format(vel) + " Alt: " + f.format(alt) + " Dist: " + f.format(dist) + " Fuel: " + f.format(fuel) + "%"; 
+		int fuel = _squirrel.getFuel();
+		return "Vel: " + f.format(vel) + " Alt: " + f.format(alt) + " Dist: " + f.format(dist) + " Fuel: " + fuel + "%"; 
 	}
 	
 }
