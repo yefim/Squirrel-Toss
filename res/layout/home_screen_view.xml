@@ -12,8 +12,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
+        android:textSize="30dp"
+        android:typeface="monospace"
+        android:textColor="@color/btn_color"
         android:background="@android:color/transparent"
-        android:textColor="#ff0000"
-        android:text="Play" />
+        android:text="@string/btn_play" />
 
 </RelativeLayout>

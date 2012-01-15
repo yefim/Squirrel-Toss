@@ -46,10 +46,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		
 		_backgrounds = new Background[2];
 		bmp = BitmapFactory.decodeResource(getResources(),
-				R.drawable.background2);
+				R.drawable.trees);
 		_backgrounds[1] = new Background(this, bmp, _squirrel, false);
 		bmp = BitmapFactory.decodeResource(getResources(),
-				R.drawable.sky_stand_in);
+				R.drawable.clouds_small);
 		_backgrounds[0] = new Background(this, bmp, _squirrel, true);
 		
 		_acorns = new ArrayList<Acorn>();
@@ -140,7 +140,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		for (int i = 0; i < _backgrounds.length; i++)
 			_backgrounds[i].onDraw(canvas);
 		if (_squirrel.getAltitude() <= 0) {
-			//Log.d("GameView",_statusText.toString());
+			Log.d("GameView","game over!");
 			//_statusText.setText("Game Over\nAcorns Eaten: " + _acornsEaten);
 			//_statusText.setVisibility(View.VISIBLE);
 			//_gameThread.setRunning(false);

@@ -71,6 +71,7 @@ public class Squirrel extends Sprite {
 			_nearGround = true;
 		else
 			_nearGround = false;
+		//Log.d("Squirrel", "bottom: " + _bottom);
 	}
 
 	public boolean isNearGround() {
