@@ -34,11 +34,12 @@ public class GameThread extends Thread {
 						_view.getBackgroundYSpeed());
 				if (_view.getSquirrel().intersects(acorns.get(i))) {
 					_view.acornEaten();
+					_view.playWee();
 					acorns.remove(i);
 					i -= 1;
 				} else if (!acorns.get(i).onScreen()) {
 					acorns.remove(i);
-					i--;
+					i -= 1;
 				}
 			}
 			try {

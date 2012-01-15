@@ -7,6 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -19,6 +22,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private GameThread _gameThread;
     private TextView _statusText;
 	private Squirrel _squirrel;
+	
+	private SoundPool sounds;
+	private MediaPlayer music;
+	private int wee;
+	
 	private ArrayList<Acorn> _acorns;
 	private int _acornsEaten = 0;
 	private ScoreBar _scorebar;
@@ -47,6 +55,27 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		_acorns = new ArrayList<Acorn>();
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.score_bar);
 		_scorebar = new ScoreBar(_squirrel, bmp);
+		loadSound(context);
+		playMusic();
+	}
+	private void loadSound(Context context) {
+		sounds = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+		wee = sounds.load(context, R.raw.wee, 1);
+		music = MediaPlayer.create(context, R.raw.popcorn);
+	}
+	public void playMusic() {
+		if(!music.isPlaying()) {
+			music.seekTo(0);
+			music.start();
+			music.setLooping(true);
+		}
+	}
+	public void pauseMusic() {
+		if (music.isPlaying())
+			music.pause();
+	}
+	public void playWee() {
+		sounds.play(wee, 1, 1, 1, 0, 1);
 	}
 
 	public void addAcorn() {
@@ -120,12 +149,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		}
 		_squirrel.onDraw(canvas);
 		for (int i = 0; i < _acorns.size(); i++) {
-			if (_squirrel.intersects(_acorns.get(i))) {
-				_acornsEaten += 1;
-				Log.d("GameView","intersected!" + _acornsEaten);
-				_acorns.remove(i);
-				i -= 1;
-			}
 			_acorns.get(i).onDraw(canvas);
 		}
 		_scorebar.onDraw(canvas);
@@ -145,6 +168,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
+		this.release();
 		boolean retry = true;
 		_gameThread.setRunning(false);
 		while (retry) {
@@ -154,6 +178,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			} catch (InterruptedException e) {
 			}
 		}
+	}
+	public void release() {
+		sounds.release();
+		music.stop();
+		music.release();
 	}
 
 }

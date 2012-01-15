@@ -10,14 +10,14 @@ public class Squirrel extends Sprite {
 	private int _fuel = 100;
 	private boolean _inFreeFall, _catchingUp, _fallToGround;
 	// dv = dt * a
-	private final double GRAVITY_CONSTANT = 2.5;
+	private final double GRAVITY_CONSTANT = 4.9;
 	private final double GRAVITY_DROP = GRAVITY_CONSTANT/GameThread.FPS;
-	private final double TILT_ANGLE_RADIANS = 0.5;
+	private final double TILT_ANGLE_RADIANS = 0.2;
 	private final double BOOST = 1.0;
-	private final double SLOW_DOWN = 0.005;
+	private final double SLOW_DOWN = 0.01;
 	private final float POS_X = (float) (PennApps2012Activity.screen_width/4.0);
 	private final float POS_Y = (float) (PennApps2012Activity.screen_height/2.0);
-	private final double MAX_MIN_ANGLE = 75.0;
+	private final double MAX_MIN_ANGLE = 65.0;
 	static final double CATCH_UP_SPEED = 5.0;
 	
 
