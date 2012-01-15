@@ -139,44 +139,27 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		if(_squirrel.isStopped()) { 
-			Paint paint = new Paint(); 
-			paint.setColor(Color.BLACK); 
-			paint.setTextSize(20); 
-			canvas.drawText("Game Over", 100, 250, paint); 
-		}
 		canvas.drawColor(Color.BLACK);
 		for (int i = 0; i < _backgrounds.length; i++)
 			_backgrounds[i].onDraw(canvas);
-		if (_squirrel.getAltitude() <= 0) {
-			Log.d("GameView","game over!");
-			//_statusText.setText("Game Over\nAcorns Eaten: " + _acornsEaten);
-			//_statusText.setVisibility(View.VISIBLE);
-			//_gameThread.setRunning(false);
-			return;
-		}
-		_squirrel.onDraw(canvas);
+		_squirrel.onDraw(canvas);	
 		for (int i = 0; i < _acorns.size(); i++) {
 			_acorns.get(i).onDraw(canvas);
 		}
 		_scorebar.onDraw(canvas);
-	}
-	
-	public void gameOver() {
-		_gameThread.setRunning(false);
-		Canvas c = null;
-		try {
-			c = getHolder().lockCanvas();
-			synchronized (getHolder()) {
-				onDraw(c);
-			}
-		} finally {
-			if (c != null) {
-				getHolder().unlockCanvasAndPost(c);
-			}
+		if(_squirrel.isStopped()) { 
+			Paint paint = new Paint(); 
+			paint.setColor(Color.WHITE); 
+			canvas.drawRect(PennApps2012Activity.screen_width/4, PennApps2012Activity.screen_height/8, 3*PennApps2012Activity.screen_width/4, PennApps2012Activity.screen_height*7/8, paint);
+			paint.setColor(Color.BLACK); 
+			paint.setTextSize(60); 
+			canvas.drawText("Game Over", PennApps2012Activity.screen_width*3/8, PennApps2012Activity.screen_height/4, paint);
+			paint.setTextSize(30); 
+			canvas.drawText("Number of Acorns Eaten:"+_acornsEaten, PennApps2012Activity.screen_width*3/8, PennApps2012Activity.screen_height/2, paint);
+			canvas.drawText("Distance: "+_squirrel.getDistance(), PennApps2012Activity.screen_width*3/8, PennApps2012Activity.screen_height*5/8, paint);
 		}
 	}
-
+	
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
