@@ -67,7 +67,7 @@ public class Squirrel extends Sprite {
 		accelerate_due_to_gravity();
 		decelerate();
 		rotate();
-		if (_bottom < 130)
+		if (_bottom < 80)
 			_nearGround = true;
 		else
 			_nearGround = false;

@@ -46,7 +46,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		
 		_backgrounds = new Background[2];
 		bmp = BitmapFactory.decodeResource(getResources(),
-				R.drawable.background_stand_in);
+				R.drawable.background2);
 		_backgrounds[1] = new Background(this, bmp, _squirrel, false);
 		bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.sky_stand_in);
