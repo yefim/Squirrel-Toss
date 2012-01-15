@@ -31,7 +31,6 @@ public class SplashActivity extends Activity {
 					Intent intent = new Intent();
 					intent.setClass(SplashActivity.this, PennApps2012Activity.class); 
 					startActivity(intent);
-					stop();
 				}
 			}
 		};
