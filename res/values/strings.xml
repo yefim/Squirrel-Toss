@@ -5,6 +5,6 @@
     <string name="app_name">Squirrel Toss</string>
     <string name="test_string">TESTING</string>
     <color name="btn_color">#A36E3E</color>
-    <string name="btn_play">Play</string>
+    <string name="btn_play">play</string>
 
 </resources>
