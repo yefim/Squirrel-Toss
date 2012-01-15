@@ -108,14 +108,19 @@ public class Squirrel extends Sprite {
 		if (_done || _angle_radians <= Math.toRadians(-MAX_MIN_ANGLE))
 			return;
 		_angle_radians -= TILT_ANGLE_RADIANS;
+		_fuel -= 1;
 	}
 
 	public void tiltDown() {
 		if (_done || _angle_radians >= Math.toRadians(MAX_MIN_ANGLE))
 			return;
 		_angle_radians += TILT_ANGLE_RADIANS;
+		_fuel -= 1;
 	}
-
+	public void increaseVelocity() {
+		_velocity += 60 * SLOW_DOWN;
+	}
+	
 	public void boost() {
 		_velocity += BOOST;
 		_fuel -= 1;
